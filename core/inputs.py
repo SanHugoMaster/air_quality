@@ -47,7 +47,8 @@ class UserInterface:
 # class FinalResult:
 #     def plot_location(self):
 
-
+print("Rafa estuvo aquí")
+ 
 print(
     "Bienvenido al programa que te permite recuperar información gráfica acerca de algunos contaminantes"
 )
