@@ -42,7 +42,7 @@ class UserInterface:
                     "raw_data/AirQualityUCI.csv", pollutant, factor
                 )
                 ## Aquí tendría que invocar una función que elimine los registros NaN
-                DataAnalysis().empty_data_remover()
+                DataAnalysis().empty_data_remover(analysis)
                 ## A continuación invoco a otra función para darle formato a
                 ## la fecha y al contaminante, su definición la pueden encontrar en
                 ## el archivo de utils.py
