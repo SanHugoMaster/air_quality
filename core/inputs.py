@@ -1,3 +1,4 @@
+from ctypes.wintypes import HACCEL
 from utils import DataAnalysis
 
 # from commons.constants import pollutants
@@ -14,7 +15,7 @@ pollutants = {
     "PT08_S4": "PT08.S4(NO2)",
     "PT08_S5": "PT08.S5(O3)",
 }
-variables = {"T": "T", "H": "AH"}
+variables = {"Time": "Time","T": "T", "H": "AH"}
 
 
 class UserInterface:
@@ -22,16 +23,17 @@ class UserInterface:
         while True:
             try:
                 self.pollutant = input(
-                    f"Escoge un contaminante de la siguiente lista: {pollutants.keys()}\n"
+                    f"Escoge un contaminante a analizar de la siguiente lista: {pollutants.keys()}\n"
                 )
                 self.factor = input(
                     f"Escoge una propiedad de la siguiente lista: {variables.keys()}\n"
                 )
                 analysis = DataAnalysis().data_retriever(
+                    #Aqui había un / de más al inicio
                     "raw_data/AirQualityUCI.csv",
                     pollutants.get(str(self.pollutant)),
-                    variables.get(str(self.factor)),
-                )
+                    variables.get(str(self.factor))
+                    )
                 print(analysis)
                 print("ADIOS")
                 return analysis
@@ -42,15 +44,15 @@ class UserInterface:
                     break
 
 
+
 ## En esta clase(que aun no estoy segura de dejar como clase), indicarás dónde
 # estará ubicada la animación o resultado final.
 # class FinalResult:
 #     def plot_location(self):
-
-print("Rafa estuvo aquí")
  
 print(
     "Bienvenido al programa que te permite recuperar información gráfica acerca de algunos contaminantes"
 )
 
 UserInterface().input_retriever()
+##Aquí ya tenemos el dataframe consistente con 
