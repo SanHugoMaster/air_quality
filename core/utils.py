@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 
 class DataAnalysis:
@@ -16,8 +17,7 @@ class DataAnalysis:
         )
         return data
 
-    def empty_data_remover(
-        self,
-    ):
-        # TODO: Falta completar esta función para eliminar los registros con valores NaN
-        pass
+    def empty_data_remover(self,data:pd.DataFrame)
+        data.replace(r'^\s*$', np.nan, regex=True,inplace=True)
+        data.dropna(inplace=True)
+        return None
