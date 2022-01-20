@@ -16,8 +16,7 @@ class DataAnalysis:
         )
         return data
 
-    def empty_data_remover(
-        self,
-    ):
+    def empty_data_remover(self, data:pd.DataFrame):
+        data.dropna(inplace=True)
+        return None 
         # TODO: Falta completar esta función para eliminar los registros con valores NaN
-        pass
