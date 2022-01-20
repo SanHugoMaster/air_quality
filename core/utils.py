@@ -3,18 +3,21 @@ import pandas as pd
 
 class DataAnalysis:
     def file_reader(self, file: str):
-        dataframe = pd.read_csv(file, delimiter=";")
-
-        return dataframe
+        return pd.read_csv(file, delimiter=";")
 
     def data_retriever(self, file, data1: str, data2: str):
-        data = self.file_reader(file)[["Date", "Time", data1, data2]]
+        return self.file_reader(file)[["Date", "Time", data1, data2]]
+
+    def data_formatter(self, data: pd.DataFrame, pollutant: str):
+        data["Date"] = data["Date"] + " " + data["Time"]
+        data["Date"] = pd.to_datetime(data["Date"], format="%d/%m/%Y %H.%M.%S")
+        data[pollutant] = pd.to_numeric(
+            data[pollutant].str.replace(",", ".").str.replace("-200", "")
+        )
         return data
 
-
-# resultado final:
-# solo se introducen tres variables, el tipo de contaminante,
-# otra variable a comparar y el rango de fechas (opcional) con
-# formato específico. Como output se muestra la animación y se
-# da una interpretación de los datos (con esto igual puedes hacer
-# un rango de datos).
+    def empty_data_remover(
+        self,
+    ):
+        # TODO: Falta completar esta función para eliminar los registros con valores NaN
+        pass
