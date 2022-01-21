@@ -41,16 +41,22 @@ class UserInterface:
                 analysis = DataAnalysis().data_retriever(
                     "raw_data/AirQualityUCI.csv", pollutant, factor
                 )
-                ## Aquí tendría que invocar una función que elimine los registros NaN
-                DataAnalysis().empty_data_remover()
                 ## A continuación invoco a otra función para darle formato a
                 ## la fecha y al contaminante, su definición la pueden encontrar en
                 ## el archivo de utils.py
-                DataAnalysis().data_formatter(analysis, pollutant)
+                DataAnalysis().data_formatter(analysis, pollutant,factor)
+                ## Moví aquí la función que elimina los registros NaN para que borre
+                ## los registros del dataframe final
+                DataAnalysis().empty_data_remover(analysis)
+                ## Esta función devuelve el coeficiente de correlación de Pearson
+                ## entre el contaminante y el factor elegidos
+                DataAnalysis().Pearson_correlation(analysis,pollutant,factor)
                 ## Moví el código que había aquí para graficar y lo metí en una función
                 ## que se dedica exclusivamente al graficado y la pueden encontrar
                 ## en el archivo core/plot.py
+
                 plotter(analysis["Date"], analysis[pollutant])
+                ## El programa se está terminando en plotter(), no regresa a imprimir éste ADIOS
                 print("ADIOS")
                 return analysis
             except:
