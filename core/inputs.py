@@ -47,6 +47,7 @@ class UserInterface:
                 DataAnalysis().data_formatter(analysis, pollutant,factor)
                 ## Moví aquí la función que elimina los registros NaN para que borre
                 ## los registros del dataframe final
+                print(analysis)
                 DataAnalysis().empty_data_remover(analysis)
                 ## Esta función devuelve el coeficiente de correlación de Pearson
                 ## entre el contaminante y el factor elegidos
@@ -54,8 +55,7 @@ class UserInterface:
                 ## Moví el código que había aquí para graficar y lo metí en una función
                 ## que se dedica exclusivamente al graficado y la pueden encontrar
                 ## en el archivo core/plot.py
-
-                plotter(analysis["Date"], analysis[pollutant])
+                plotter(analysis["Date"], analysis[pollutant],analysis[factor],pollutant,factor)
                 ## El programa se está terminando en plotter(), no regresa a imprimir éste ADIOS
                 print("ADIOS")
                 return analysis
