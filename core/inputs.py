@@ -1,25 +1,7 @@
 from utils import DataAnalysis
 from plot import plotter
 
-# from commons.constants import pollutants
-
-
-## Estos diccionarios no deberian estar aquí, sino importarse desde el archivo de constantes
-## pero no he logrado resolver el problema de por qué no me deja importarlos
-## directamente
-pollutants = {
-    "CO": "CO(GT)",
-    "PT08_S1": "PT08.S1(CO)",
-    "NMHC": "NMHC(GT)",
-    "C6H6": "C6H6(GT)",
-    "PT08_S2": "PT08.S2(NMHC)",
-    "NOX": "NOx(GT)",
-    "PT08_S3": "PT08.S3(NOx)",
-    "NO2": "NO2(GT)",
-    "PT08_S4": "PT08.S4(NO2)",
-    "PT08_S5": "PT08.S5(O3)",
-}
-variables = {"T": "T", "H": "AH"}
+from constants import pollutants, variables
 
 
 class UserInterface:
@@ -44,18 +26,24 @@ class UserInterface:
                 ## A continuación invoco a otra función para darle formato a
                 ## la fecha y al contaminante, su definición la pueden encontrar en
                 ## el archivo de utils.py
-                DataAnalysis().data_formatter(analysis, pollutant,factor)
+                DataAnalysis().data_formatter(analysis, pollutant, factor)
                 ## Moví aquí la función que elimina los registros NaN para que borre
                 ## los registros del dataframe final
                 print(analysis)
                 DataAnalysis().empty_data_remover(analysis)
                 ## Esta función devuelve el coeficiente de correlación de Pearson
                 ## entre el contaminante y el factor elegidos
-                DataAnalysis().Pearson_correlation(analysis,pollutant,factor)
+                DataAnalysis().Pearson_correlation(analysis, pollutant, factor)
                 ## Moví el código que había aquí para graficar y lo metí en una función
                 ## que se dedica exclusivamente al graficado y la pueden encontrar
                 ## en el archivo core/plot.py
-                plotter(analysis["Date"], analysis[pollutant],analysis[factor],pollutant,factor)
+                plotter(
+                    analysis["Date"],
+                    analysis[pollutant],
+                    analysis[factor],
+                    pollutant,
+                    factor,
+                )
                 ## El programa se está terminando en plotter(), no regresa a imprimir éste ADIOS
                 print("ADIOS")
                 return analysis
